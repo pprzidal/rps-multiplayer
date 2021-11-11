@@ -5,7 +5,7 @@ from game import RockPaperScissors
 class Server:
     def __init__(self, port: int):
         self._socket = socket.socket()
-        self._socket.bind(('', port))
+        self._socket.bind(('172.20.10.7', port))
         self._socket.listen(2)
         self._aresp, self._bresp = None, None
         self._a, self._b = None, None
@@ -36,7 +36,9 @@ class Server:
                 self._bresp = text
 
     def loop(self):
+        print("oy")
         self._a = self._socket.accept()
+        print("yo")
         # TODO \n maybe?
         Server._send(self._a, "waiting")
         self._b = self._socket.accept()
