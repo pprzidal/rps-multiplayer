@@ -10,6 +10,7 @@ class Server:
         self._aresp, self._bresp = None, None
         self._a, self._b = None, None
         self.game = RockPaperScissors()
+        self._disconnected = None
 
     def _sendToBoth(self, message: str):
         self._a.send(Server._toUTF8(message))
@@ -22,35 +23,49 @@ class Server:
         wer.send(Server._toUTF8(was))
 
     def waitForAnswer(self, socket: socket.socket):
-        mes = socket.recv(1024).decode('UTF-8')
-        if socket == self._a:
-            self._aresp = mes
+        text = ""
+        while not text.contains("\n"):
+            text = text + socket.recv(1024).decode('UTF-8')
+        print(text)
+        if text == "disconnect":
+            self._disconnected = socket
         else:
-            self._bresp = mes
+            if socket == self._a:
+                self._aresp = text
+            else:
+                self._bresp = text
 
     def loop(self):
         self._a = self._socket.accept()
         # TODO \n maybe?
-        Server._send(self._a, "Waiting for opponent")
+        Server._send(self._a, "waiting")
         self._b = self._socket.accept()
-        Server._sendToBoth(self._a, self._b, "We found an opponent for you")
-        # TODO loop hier?
-        while True:
+        Server._sendToBoth(self._a, self._b, "found")
+        while self._disconnected == None:
             athread = threading.Thread(target=Server.waitForAnswer(), args=[self._a])
             bthread = threading.Thread(target=Server.waitForAnswer(), args=[self._b])
             athread.start()
             bthread.start()
             athread.join()
             bthread.join()
+            if self._disconnected != None:
+                if self._disconnected == self._a:
+                    Server._send(self._b, "disconnect")
+                else:
+                    Server._send(self._a, "disconnect")
+                break
+                
+
             ans = self.game.play(RockPaperScissors.toInt(self._aresp.lower()), RockPaperScissors.toInt(self._bresp.lower()))
             if ans == None:
-                Server._sendToBoth("Tie!")
+                Server._send(self._a, f"tie;{self._bresp}")
+                Server._send(self._b, f"tie;{self._aresp}")
             elif ans == 'player':
-                Server._send(self._a, "You won!")
-                Server._send(self._b, "You lost!")
+                Server._send(self._a, f"won;{self._bresp}")
+                Server._send(self._b, f"lost;{self._aresp}")
             elif ans == 'computer':
-                Server._send(self._b, "You won!")
-                Server._send(self._a, "You lost!")
+                Server._send(self._b, f"won;{self._aresp}")
+                Server._send(self._a, f"lost;{self._aresp}")
 
 
 if __name__ == "__main__":
@@ -59,4 +74,5 @@ if __name__ == "__main__":
     except ValueError:
         print("man")
         sys.exit(1)
-    Server(port).loop()
+    while True:
+        Server(port).loop()
