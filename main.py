@@ -7,24 +7,26 @@ class Server:
         self._socket = socket.socket()
         self._socket.bind(('172.20.10.7', port))
         self._socket.listen(2)
-        self._aresp, self._bresp = None, None
-        self._a, self._b = None, None
+        self._aresp = None
+        self._bresp = None
+        self._a = None
+        self._b = None
         self.game = RockPaperScissors()
         self._disconnected = None
 
     def _sendToBoth(self, message: str):
-        self._a.send(Server._toUTF8(message))
-        self._b.send(Server._toUTF8(message))
+        self._a.send(self._toUTF8(message))
+        self._b.send(self._toUTF8(message))
 
     def _toUTF8(self, txt: str):
-        return f"{txt}\n".encode('UTF-8')
+        return f"{txt}\n".encode('UTF-8')   #probably remove \n
 
     def _send(self, wer: socket.socket, was: str):
-        wer.send(Server._toUTF8(was))
+        wer.send(self._toUTF8(was))
 
     def waitForAnswer(self, socket: socket.socket):
         text = ""
-        while not text.contains("\n"):
+        while "\n" not in text:
             text = text + socket.recv(1024).decode('UTF-8')
         print(text)
         if text == "disconnect":
@@ -36,29 +38,31 @@ class Server:
                 self._bresp = text
 
     def loop(self):
-        print("oy")
-        self._a = self._socket.accept()
-        print("yo")
-        # TODO \n maybe?
-        Server._send(self._a, "waiting")
-        self._b = self._socket.accept()
-        Server._sendToBoth(self._a, self._b, "found")
-        while self._disconnected == None:
-            athread = threading.Thread(target=Server.waitForAnswer(), args=[self._a])
-            bthread = threading.Thread(target=Server.waitForAnswer(), args=[self._b])
+        print("Server Started")
+        self._a = self._socket.accept()[0]
+        print("First Client Found")
+        self._send(self._a, "waiting")
+        self._b = self._socket.accept()[0]
+        print("Second Client Found")
+        self._sendToBoth("found")
+        while self._disconnected == None:   #Probably useless
+            athread = threading.Thread(target=self.waitForAnswer, args=[self._a])
+            bthread = threading.Thread(target=self.waitForAnswer, args=[self._b])
             athread.start()
             bthread.start()
             athread.join()
             bthread.join()
+
             if self._disconnected != None:
                 if self._disconnected == self._a:
                     Server._send(self._b, "disconnect")
                 else:
                     Server._send(self._a, "disconnect")
+                print("Client Disconnected")
                 break
                 
-
             ans = self.game.play(RockPaperScissors.toInt(self._aresp.lower()), RockPaperScissors.toInt(self._bresp.lower()))
+            print(ans)
             if ans == None:
                 Server._send(self._a, f"tie;{self._bresp}")
                 Server._send(self._b, f"tie;{self._aresp}")
@@ -74,7 +78,7 @@ if __name__ == "__main__":
     try:
         port = int(sys.argv[1])
     except ValueError:
-        print("man")
+        print("port NaN")
         sys.exit(1)
     while True:
         Server(port).loop()
