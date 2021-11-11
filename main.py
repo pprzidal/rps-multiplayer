@@ -73,11 +73,11 @@ class Server:
             elif ans == 'player':
                 self._send(self._a, f"won;{self._bresp}")
                 self._send(self._b, f"lost;{self._aresp}")
-                print("WINNER IS: " + ans)
+                print("WINNER IS: " + "Spieler 1")
             elif ans == 'computer':
                 self._send(self._b, f"won;{self._aresp}")
                 self._send(self._a, f"lost;{self._aresp}")
-                print("WINNER IS: " + ans)
+                print("WINNER IS: " + "Spieler 2")
 
 
 if __name__ == "__main__":
