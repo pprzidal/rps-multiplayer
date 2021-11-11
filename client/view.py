@@ -1,3 +1,4 @@
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import *
 from PyQt6 import uic
 
@@ -18,6 +19,9 @@ class View(QMainWindow):
         self.pb_exec.clicked.connect(c.play)
         self.pb_reset.clicked.connect(c.reset)
 
+    def reset(self):
+        pass
+
     def getPlayerChoice(self):
         return self.comboBox.currentText()
 
@@ -29,10 +33,25 @@ class View(QMainWindow):
         self.p2Points.setText(p2Points)
 
     def setP1Choice(self, p1Choice: str):
-        pass
+        pix = QPixmap()
+        if p1Choice == "Schere":
+            pix.load("schere.jpg")
+        elif p1Choice == "Stein":
+            pix.load("stein.jpg")
+        elif p1Choice == "papier.jpg":
+            pix.load("stein.jpg")
+        self.p1Choice.setPixmap(pix)
 
     def setP2choice(self, p2Choice: str):
-        pass
+        pix = QPixmap()
+        if p2Choice == "Schere":
+            pix.load("schere.jpg")
+        elif p2Choice == "Stein":
+            pix.load("stein.jpg")
+        elif p2Choice == "papier.jpg":
+            pix.load("stein.jpg")
+        self.p2Choice.setPixmap(pix)
 
     def setStatus(self, message: str):
         self.statusBar().showMessage(message)
+
