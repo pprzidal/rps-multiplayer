@@ -29,8 +29,8 @@ class View(QMainWindow):
         self.rounds.setText(rounds)
 
     def setPoints(self, p1Points: int, p2Points: int):
-        self.p1Points.setText(p1Points)
-        self.p2Points.setText(p2Points)
+        self.p1Points.setText(f"{p1Points}")
+        self.p2Points.setText(f"{p2Points}")
 
     def setP1Choice(self, p1Choice: str):
         pix = QPixmap()

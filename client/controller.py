@@ -1,6 +1,7 @@
 import view
 import model
 import sys
+import threading
 from PyQt6.QtWidgets import QApplication
 
 
@@ -28,9 +29,15 @@ class Controller:
     def play(self):
         choice = self.view.getPlayerChoice()
         self.model.play(choice)
+        self.model.earn()
+        #einThread = threading.Thread(target=self.model.earn)
+        #einThread.start()
+        #einThread.join()
+        #self.model.earn()
         self.view.setP1Choice(choice)
         self.view.setP2choice(self.model.getP2Choice())
         self.view.setPoints(self.model.p1Points, self.model.p2Points)
+        self.view.setRounds(f"{self.model.rounds}")
         self.view.setStatus(f"You have {self.model.message}")
 
 
