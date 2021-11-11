@@ -69,12 +69,15 @@ class Server:
             if ans == None:
                 self._send(self._a, f"tie;{self._bresp}")
                 self._send(self._b, f"tie;{self._aresp}")
+                print("WINNER IS: NO ONE")
             elif ans == 'player':
                 self._send(self._a, f"won;{self._bresp}")
                 self._send(self._b, f"lost;{self._aresp}")
+                print("WINNER IS: " + ans)
             elif ans == 'computer':
                 self._send(self._b, f"won;{self._aresp}")
                 self._send(self._a, f"lost;{self._aresp}")
+                print("WINNER IS: " + ans)
 
 
 if __name__ == "__main__":
