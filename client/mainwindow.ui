@@ -206,192 +206,9 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
   <widget class="QWidget" name="centralwidget">
    <property name="palette">
     <palette>
-     <active>
-      <colorrole role="Button">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Base">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Window">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-     </active>
-     <inactive>
-      <colorrole role="Button">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Base">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Window">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-     </inactive>
-     <disabled>
-      <colorrole role="Button">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Base">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-      <colorrole role="Window">
-       <brush brushstyle="LinearGradientPattern">
-        <gradient startx="0.000000000000000" starty="0.000000000000000" endx="0.000000000000000" endy="1.000000000000000" type="LinearGradient" spread="PadSpread" coordinatemode="ObjectBoundingMode">
-         <gradientstop position="0.269663000000000">
-          <color alpha="255">
-           <red>85</red>
-           <green>170</green>
-           <blue>127</blue>
-          </color>
-         </gradientstop>
-         <gradientstop position="1.000000000000000">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </gradientstop>
-        </gradient>
-       </brush>
-      </colorrole>
-     </disabled>
+     <active/>
+     <inactive/>
+     <disabled/>
     </palette>
    </property>
    <property name="autoFillBackground">
@@ -451,6 +268,9 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="p1Choice">
+        <property name="styleSheet">
+         <string notr="true">text-align: center</string>
+        </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
@@ -458,6 +278,9 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
       </item>
       <item>
        <widget class="QLabel" name="p2Choice">
+        <property name="styleSheet">
+         <string notr="true">float: right</string>
+        </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>

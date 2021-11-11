@@ -38,8 +38,8 @@ class View(QMainWindow):
             pix.load("schere.jpg")
         elif p1Choice == "Stein":
             pix.load("stein.jpg")
-        elif p1Choice == "papier.jpg":
-            pix.load("stein.jpg")
+        elif p1Choice == "Papier":
+            pix.load("papier.jpg")
         self.p1Choice.setPixmap(pix)
 
     def setP2choice(self, p2Choice: str):
@@ -48,8 +48,8 @@ class View(QMainWindow):
             pix.load("schere.jpg")
         elif p2Choice == "Stein":
             pix.load("stein.jpg")
-        elif p2Choice == "papier.jpg":
-            pix.load("stein.jpg")
+        elif p2Choice == "Papier":
+            pix.load("papier.jpg")
         self.p2Choice.setPixmap(pix)
 
     def setStatus(self, message: str):
