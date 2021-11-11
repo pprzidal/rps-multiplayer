@@ -28,6 +28,7 @@ class Controller:
     def play(self):
         choice = self.view.getPlayerChoice()
         self.model.play(choice)
+        self.view.setP1Choice(choice)
         self.view.setP2choice(self.model.getP2Choice())
         self.view.setPoints(self.model.p1Points, self.model.p2Points)
         self.view.setStatus(self.model.message)
