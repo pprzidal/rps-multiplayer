@@ -5,7 +5,7 @@ from game import RockPaperScissors
 class Server:
     def __init__(self, port: int):
         self._socket = socket.socket()
-        self._socket.bind(('172.20.10.7', port))
+        self._socket.bind(('172.20.10.7', port))    #Ever changing IP Address
         self._socket.listen(2)
         self._aresp = None
         self._bresp = None
@@ -28,7 +28,8 @@ class Server:
         text = ""
         while "\n" not in text:
             text = text + socket.recv(1024).decode('UTF-8')
-        print(text)
+        text = text.strip()
+        print("RECEIVED: " + text)
         if text == "disconnect":
             self._disconnected = socket
         else:
@@ -38,12 +39,12 @@ class Server:
                 self._bresp = text
 
     def loop(self):
-        print("Server Started")
+        print("--- Server Started")
         self._a = self._socket.accept()[0]
-        print("First Client Found")
+        print("--- First Client Found")
         self._send(self._a, "waiting")
         self._b = self._socket.accept()[0]
-        print("Second Client Found")
+        print("--- Second Client Found")
         self._sendToBoth("found")
         while self._disconnected == None:   #Probably useless
             athread = threading.Thread(target=self.waitForAnswer, args=[self._a])
@@ -55,23 +56,25 @@ class Server:
 
             if self._disconnected != None:
                 if self._disconnected == self._a:
-                    Server._send(self._b, "disconnect")
+                    self._send(self._b, "disconnect")
                 else:
-                    Server._send(self._a, "disconnect")
-                print("Client Disconnected")
+                    self._send(self._a, "disconnect")
+                print("--- Client Disconnected")
                 break
-                
-            ans = self.game.play(RockPaperScissors.toInt(self._aresp.lower()), RockPaperScissors.toInt(self._bresp.lower()))
-            print(ans)
+            
+            print ("ARESP: " + self._aresp)
+            print ("BRESP: " + self._bresp)
+            ans = self.game.play(self.game.toInt(self._aresp.lower()), dchoice=self.game.toInt(self._bresp.lower()))
+            #print("WINNER IS: " + ans)
             if ans == None:
-                Server._send(self._a, f"tie;{self._bresp}")
-                Server._send(self._b, f"tie;{self._aresp}")
+                self._send(self._a, f"tie;{self._bresp}")
+                self._send(self._b, f"tie;{self._aresp}")
             elif ans == 'player':
-                Server._send(self._a, f"won;{self._bresp}")
-                Server._send(self._b, f"lost;{self._aresp}")
+                self._send(self._a, f"won;{self._bresp}")
+                self._send(self._b, f"lost;{self._aresp}")
             elif ans == 'computer':
-                Server._send(self._b, f"won;{self._aresp}")
-                Server._send(self._a, f"lost;{self._aresp}")
+                self._send(self._b, f"won;{self._aresp}")
+                self._send(self._a, f"lost;{self._aresp}")
 
 
 if __name__ == "__main__":

@@ -34,7 +34,7 @@ class RockPaperScissors:
             self._computer_score += 1
             won = "computer"
         self._round += 1
-        self._opponent.addToHistory({"player": self.toString(players_choice), "computer": self.toString(ochoice), "won": won if won is not None else "tie"})
+        #self._opponent.addToHistory({"player": self.toString(players_choice), "computer": self.toString(ochoice), "won": won if won is not None else "tie"})
         #return self.stats()
         return won
 
@@ -63,8 +63,16 @@ class RockPaperScissors:
         """
         return ["Rock", "Paper", "Scissors"][a]
 
-    def toInt(self, message: str):
-        return {"rock": 0, "paper": 1, "scissors": 2}[message]
+    def toInt(self, message: str) -> int:
+        if message == "rock":
+            return 0
+        elif message == "paper":
+            return 1
+        elif message == "scissors":
+            return 2
+        #e = {"rock": 0, "paper": 1, "scissors": 2}
+        #print(message + " TO " + e[message])
+        return -1
 
 
 if __name__ == "__main__":
