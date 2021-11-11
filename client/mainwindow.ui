@@ -96,7 +96,7 @@ QLabel#label_2, QLabel#rounds {
 	margin: 5% 10%;
 }
 
-QLabel#plabel {
+QLabel#p1label {
 	min-height: 4em;
 	border-style: solid;
 	border-width: 2px;
@@ -104,7 +104,7 @@ QLabel#plabel {
 	border-color: blue
 }
 
-QLabel#pPoints {
+QLabel#p1Points {
 	min-height: 9em;
 	background-color: lightblue;
 	border-style: solid;
@@ -113,14 +113,14 @@ QLabel#pPoints {
 	border-color: blue
 }
 
-QLabel#clabel {
+QLabel#p2label {
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 6px;
 	border-color: red
 }
 
-QLabel#cPoints {
+QLabel#p2Points {
 	background-color: rgb(255, 125, 145);
 	border-style: solid;
 	border-width: 2px;
