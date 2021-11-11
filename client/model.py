@@ -1,6 +1,6 @@
 import socket
 
-HOST = '172.20.10.7'
+HOST = '172.20.10.10'
 PORT = 42945
 
 class Model:
@@ -14,7 +14,12 @@ class Model:
         self.p1Points = 0
         self.p2Points = 0
         self.rounds = 0
+        self.p2Choice = None
+        self.message = None
         self.s = None
+
+    def reset(self):
+        pass
 
     def connect(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,8 +28,10 @@ class Model:
 
     def play(self, choice: str):
         self.s.sendall(bytes(choice))
+        data = self.s.recv()
+
+    def getP2Choice(self) -> str:
+        return self.p2Choice
 
     def disconnect(self):
         self.s.sendall(b'disconnect')
-
-

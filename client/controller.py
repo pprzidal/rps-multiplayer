@@ -21,15 +21,16 @@ class Controller:
             traceback.print_exc()
             self.view.setStatus("Fehler: Konnte sich nicht mit dem Client verbinden")
 
-
     def reset(self):
-        pass
-
-    def close(self):
-        pass
+        self.model.reset()
+        self.view.reset()
 
     def play(self):
-        pass
+        choice = self.view.getPlayerChoice()
+        self.model.play(choice)
+        self.view.setP2choice(self.model.getP2Choice())
+        self.view.setPoints(self.model.p1Points, self.model.p2Points)
+        self.view.setStatus(self.model.message)
 
 
 if __name__ == '__main__':
