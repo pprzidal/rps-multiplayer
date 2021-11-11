@@ -31,7 +31,7 @@ class Controller:
         self.view.setP1Choice(choice)
         self.view.setP2choice(self.model.getP2Choice())
         self.view.setPoints(self.model.p1Points, self.model.p2Points)
-        self.view.setStatus(self.model.message)
+        self.view.setStatus(f"You have {self.model.message}")
 
 
 if __name__ == '__main__':

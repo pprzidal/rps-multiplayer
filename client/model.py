@@ -3,8 +3,8 @@ import socket
 HOST = '172.20.10.10'
 PORT = 42945
 
-class Model:
 
+class Model:
     """
     Kümmert sich um die Verbindung zum GameServer und gibt diesem die Eingabe des Benutzers
     und schickt diesem Meldungen des Servers.
@@ -28,7 +28,16 @@ class Model:
 
     def play(self, choice: str):
         self.s.sendall(bytes(choice))
-        data = self.s.recv()
+        data = self.s.recv(1024).decode("UTF-8")
+        self.rounds += 1
+        data = data.split(";")
+        self.message(data[0])
+        if data[0] == "won":
+            self.p1Points += 1
+        elif data[0] == "lost":
+            self.p2Points += 1
+        self.rounds += 1
+        self.p2Choice = data[1]
 
     def getP2Choice(self) -> str:
         return self.p2Choice

@@ -13,9 +13,9 @@ class View(QMainWindow):
     def __init__(self, c: Controller):
         super().__init__()
         uic.loadUi("mainwindow.ui", self)
-        self.comboBox.addItem("Schere")
-        self.comboBox.addItem("Stein")
-        self.comboBox.addItem("Papier")
+        self.comboBox.addItem("scissors")
+        self.comboBox.addItem("rock")
+        self.comboBox.addItem("paper")
         self.pb_exec.clicked.connect(c.play)
         self.pb_reset.clicked.connect(c.reset)
 
@@ -34,21 +34,21 @@ class View(QMainWindow):
 
     def setP1Choice(self, p1Choice: str):
         pix = QPixmap()
-        if p1Choice == "Schere":
+        if p1Choice == "scissors":
             pix.load("schere.jpg")
-        elif p1Choice == "Stein":
+        elif p1Choice == "rock":
             pix.load("stein.jpg")
-        elif p1Choice == "Papier":
+        elif p1Choice == "paper":
             pix.load("papier.jpg")
         self.p1Choice.setPixmap(pix)
 
     def setP2choice(self, p2Choice: str):
         pix = QPixmap()
-        if p2Choice == "Schere":
+        if p2Choice == "scissors":
             pix.load("schere.jpg")
-        elif p2Choice == "Stein":
+        elif p2Choice == "rock":
             pix.load("stein.jpg")
-        elif p2Choice == "Papier":
+        elif p2Choice == "paper":
             pix.load("papier.jpg")
         self.p2Choice.setPixmap(pix)
 
