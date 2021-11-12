@@ -1,4 +1,5 @@
 import socket
+import threading
 
 
 class Model:
@@ -24,13 +25,17 @@ class Model:
         self.s.connect((ip, port))
         self.status = 1
 
-    def waitTillFound(self):
+    def _blockTillFound(self, callback): # TODO maybe nasty mit dem Callback
+        text = ""
+        while "found" not in text:
+            text = text + self.s.recv(1024).decode("UTF-8")
+        self.status = 2
+        callback("We found an opponent for you")
+
+    def waitTillFound(self, callback):
         if self.status != 2:
-            text = ""
-            while "found" not in text:
-                text = text + self.s.recv(1024).decode("UTF-8")
-            self.status = 2
-            return 1
+            a = threading.Thread(target=self._blockTillFound, args=[callback])
+            a.start()
 
     def earn(self):
         data = self.s.recv(1024).decode("UTF-8").split(';')

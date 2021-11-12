@@ -18,6 +18,7 @@ class View(QMainWindow):
         self.comboBox.addItem("paper")
         self.pb_exec.clicked.connect(c.play)
         self.pb_reset.clicked.connect(c.reset)
+        self.pb_retry.clicked.connect(c.connect)
 
     def reset(self):
         pass
