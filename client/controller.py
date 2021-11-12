@@ -10,30 +10,30 @@ class Controller:
     Klasse die sich um die Kommunikation zwischen dem Model und der View kümmert
     """
 
-    def __init__(self, ip, port):
+    def __init__(self):
         self.view = view.View(self)
         self.model = model.Model()
 
-        try:
-            self.model.connect(ip, port)
-            self.view.setStatus("Verbunden mit Server")
-        except:
-            import traceback
-            traceback.print_exc()
-            self.view.setStatus("Fehler: Konnte sich nicht mit dem Client verbinden")
 
     def reset(self):
         self.model.reset()
         self.view.reset()
 
+    def connect(self, ip: str, port: int):
+        try:
+            self.model.connect(ip, port)
+            self.view.setStatus("Connected to Server. Waiting for Opponent")
+        except:
+            import traceback
+            traceback.print_exc()
+            self.view.setStatus("Error: Couldn't connect to Server")
+
     def play(self):
+        if self.model.waitTillFound() != 1:
+            return
         choice = self.view.getPlayerChoice()
         self.model.play(choice)
         self.model.earn()
-        #einThread = threading.Thread(target=self.model.earn)
-        #einThread.start()
-        #einThread.join()
-        #self.model.earn()
         self.view.setPChoice(choice, 1)
         self.view.setPChoice(self.model.getP2Choice(), 2)
         self.view.setPoints(self.model.p1Points, self.model.p2Points)
@@ -48,7 +48,9 @@ if __name__ == '__main__':
         port = int(sys.argv[2])
     except Exception:
         print('Usage works like this: python controller.py <ip> <port>\nport has to be a parsable int')
+        sys.exit(1)
     app = QApplication([])
-    c = Controller(ip, port)
+    c = Controller()
     c.view.show()
+    c.connect(ip, port)
     sys.exit(app.exec())

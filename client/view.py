@@ -34,14 +34,11 @@ class View(QMainWindow):
 
     def setPChoice(self, pChoice: str, which: int):
         pix = QPixmap()
-        pix.load(f"{View.rpsTossp(pChoice)}.jpg")
+        pix.load(f"{pChoice}.jpg")
         if which == 1:
             self.p1Choice.setPixmap(pix)
         elif which == 2:
             self.p2Choice.setPixmap(pix)
-
-    def rpsTossp(rps: str) -> str:
-        return {"rock": "stein", "paper": "papier", "scissors": "schere"}[rps]
 
     def setStatus(self, message: str):
         self.statusBar().showMessage(message)

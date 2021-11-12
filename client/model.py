@@ -14,6 +14,7 @@ class Model:
         self.p2Choice = None
         self.message = None
         self.s = None
+        self.status = 0
 
     def reset(self):
         pass
@@ -21,14 +22,18 @@ class Model:
     def connect(self, ip: str, port: int):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((ip, port))
-        text = ""
-        while "found" not in text:
-            text = text + self.s.recv(1024).decode("UTF-8")
-        print('done')
+        self.status = 1
+
+    def waitTillFound(self):
+        if self.status != 2:
+            text = ""
+            while "found" not in text:
+                text = text + self.s.recv(1024).decode("UTF-8")
+            self.status = 2
+            return 1
 
     def earn(self):
-        data = self.s.recv(1024).decode("UTF-8")
-        data = data.split(";")
+        data = self.s.recv(1024).decode("UTF-8").split(';')
         self.message = data[0]
         self.p2Choice = data[1].rsplit("\n")[0]
         print(self.p2Choice)
