@@ -26,31 +26,22 @@ class View(QMainWindow):
         return self.comboBox.currentText()
 
     def setRounds(self, rounds: int):
-        self.rounds.setText(rounds)
+        self.rounds.setText(str(rounds))
 
     def setPoints(self, p1Points: int, p2Points: int):
-        self.p1Points.setText(f"{p1Points}")
-        self.p2Points.setText(f"{p2Points}")
+        self.p1Points.setText(str(p1Points))
+        self.p2Points.setText(str(p2Points))
 
-    def setP1Choice(self, p1Choice: str):
+    def setPChoice(self, pChoice: str, which: int):
         pix = QPixmap()
-        if p1Choice == "scissors":
-            pix.load("schere.jpg")
-        elif p1Choice == "rock":
-            pix.load("stein.jpg")
-        elif p1Choice == "paper":
-            pix.load("papier.jpg")
-        self.p1Choice.setPixmap(pix)
+        pix.load(f"{View.rpsTossp(pChoice)}.jpg")
+        if which == 1:
+            self.p1Choice.setPixmap(pix)
+        elif which == 2:
+            self.p2Choice.setPixmap(pix)
 
-    def setP2choice(self, p2Choice: str):
-        pix = QPixmap()
-        if p2Choice == "scissors":
-            pix.load("schere.jpg")
-        elif p2Choice == "rock":
-            pix.load("stein.jpg")
-        elif p2Choice == "paper":
-            pix.load("papier.jpg")
-        self.p2Choice.setPixmap(pix)
+    def rpsTossp(rps: str) -> str:
+        return {"rock": "stein", "paper": "papier", "scissors": "schere"}[rps]
 
     def setStatus(self, message: str):
         self.statusBar().showMessage(message)
