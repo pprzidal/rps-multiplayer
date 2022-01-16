@@ -30,7 +30,7 @@ class Model:
         while "found" not in text:
             text = text + self.s.recv(1024).decode("UTF-8")
         self.status = 2
-        callback("We found an opponent for you")
+        callback("We found an opponent for you. You can start playing ... just select and transmit useing the 'Ausführen' button")
 
     def waitTillFound(self, callback):
         if self.status != 2:
@@ -56,3 +56,5 @@ class Model:
 
     def disconnect(self):
         self.s.sendall('disconnect\n'.encode('UTF-8'))
+        self.s.close()
+        self.status = 0

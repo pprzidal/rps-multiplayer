@@ -3,10 +3,10 @@ from game import RockPaperScissors
 
 
 class Server:
-    def __init__(self, port: int):
+    def __init__(self, ip: str, port: int):
         self._socket = socket.socket()
-        self._socket.bind(('172.20.10.7', port))    #Ever changing IP Address
-        self._socket.listen(2)
+        self._socket.bind((ip, port))  # Ever changing IP Address
+        self._socket.listen()
         self._aresp = None
         self._bresp = None
         self._a = None
@@ -19,7 +19,7 @@ class Server:
         self._b.send(self._toUTF8(message))
 
     def _toUTF8(self, txt: str):
-        return f"{txt}\n".encode('UTF-8')   #probably remove \n
+        return f"{txt}\n".encode('UTF-8')  # probably remove \n
 
     def _send(self, wer: socket.socket, was: str):
         wer.send(self._toUTF8(was))
@@ -40,13 +40,13 @@ class Server:
 
     def loop(self):
         print("--- Server Started")
-        self._a = self._socket.accept()[0]
+        self._a, _info = self._socket.accept()
         print("--- First Client Found")
         self._send(self._a, "waiting")
-        self._b = self._socket.accept()[0]
+        self._b, _info = self._socket.accept()
         print("--- Second Client Found")
         self._sendToBoth("found")
-        while self._disconnected == None:   #Probably useless
+        while self._disconnected == None:  # Probably useless
             athread = threading.Thread(target=self.waitForAnswer, args=[self._a])
             bthread = threading.Thread(target=self.waitForAnswer, args=[self._b])
             athread.start()
@@ -57,15 +57,17 @@ class Server:
             if self._disconnected != None:
                 if self._disconnected == self._a:
                     self._send(self._b, "disconnect")
+                    self._a.close()
                 else:
                     self._send(self._a, "disconnect")
+                    self._b.close()
                 print("--- Client Disconnected")
                 break
-            
-            print ("ARESP: " + self._aresp)
-            print ("BRESP: " + self._bresp)
+
+            print("ARESP: " + self._aresp)
+            print("BRESP: " + self._bresp)
             ans = self.game.play(self.game.toInt(self._aresp.lower()), dchoice=self.game.toInt(self._bresp.lower()))
-            #print("WINNER IS: " + ans)
+            # print("WINNER IS: " + ans)
             if ans == None:
                 self._send(self._a, f"tie;{self._bresp}")
                 self._send(self._b, f"tie;{self._aresp}")
@@ -82,9 +84,10 @@ class Server:
 
 if __name__ == "__main__":
     try:
-        port = int(sys.argv[1])
-    except ValueError:
-        print("port NaN")
-        sys.exit(1)
-    while True:
-        Server(port).loop()
+        port = int(sys.argv[2])
+        ip = sys.argv[1]
+    except Exception:
+        print('Usage works like this: python main.py <ip> <port>\nport has to be a parsable int')
+    else:
+        while True:
+            Server(ip, port).loop()
